@@ -21,7 +21,12 @@ import {
   ExternalLink,
   Send,
   Hammer,
-  Layers
+  Layers,
+  Clock,
+  HelpCircle,
+  Wrench,
+  Award,
+  FileText
 } from 'lucide-react';
 
 type Page = 'home' | 'about' | 'services' | 'portfolio' | 'contact';
@@ -46,7 +51,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1600);
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -62,28 +67,32 @@ export default function App() {
       title: "Storefront Signage & Branding",
       category: "Signage & Identity",
       image: "/src/assets/images/portfolio_project_1_1792610398238.jpg",
-      description: "Premium bespoke architectural signage and gold-lettered storefront branding crafted for commercial display in Plateau State."
+      description: "Premium bespoke architectural signage and gold-lettered storefront branding crafted for commercial display in Plateau State.",
+      specs: ["Material: Treated Hardwood & Brushed Brass", "Finish: Weatherproof UV Coating", "Client: Luxury Retailer"]
     },
     {
       id: 2,
       title: "Architectural Wood & Metal Craft",
       category: "Bespoke Furniture",
       image: "/src/assets/images/portfolio_project_2_1792610398709.jpg",
-      description: "Custom walnut media console and shelving featuring exquisite joinery and sleek metal framing."
+      description: "Custom walnut media console and shelving featuring exquisite joinery and sleek metal framing.",
+      specs: ["Material: Solid African Walnut & Steel", "Finish: Natural Matte Oil", "Application: Executive Interior"]
     },
     {
       id: 3,
       title: "Retail Identity & Display",
       category: "Production & Fabrication",
       image: "/src/assets/images/portfolio_project_3_1792610398422.jpg",
-      description: "Large-scale illuminated facade signage and commercial interior brand integration."
+      description: "Large-scale illuminated facade signage and commercial interior brand integration.",
+      specs: ["Material: Acrylic, LED Modules & Aluminum", "Finish: High Polish", "Scale: Commercial Flagship"]
     },
     {
       id: 4,
       title: "Laser-Engraved Corporate Plaques",
       category: "Crafted Awards",
       image: "/src/assets/images/portfolio_project_4_1792610398179.jpg",
-      description: "Precision laser-engraved wooden recognition plaques and executive presentation sets."
+      description: "Precision laser-engraved wooden recognition plaques and executive presentation sets.",
+      specs: ["Material: Mahogany & Engraved Brass", "Finish: Velvet Presentation Case", "Purpose: Corporate Recognition"]
     }
   ];
 
@@ -94,7 +103,8 @@ export default function App() {
       tag: "Editable Content",
       image: "/src/assets/images/service_creative_design_1792610398423.jpg",
       desc: "Custom 3D lettering, illuminated business signs, storefront branding, and directional displays built with precision and durability.",
-      features: ["Outdoor & Indoor Signs", "Illuminated Lettering", "Storefront Wraps"]
+      features: ["Outdoor & Indoor Signs", "Illuminated Lettering", "Storefront Wraps", "Architectural Wayfinding"],
+      details: "Our signage solutions are engineered to withstand weathering while maintaining a striking visual presence. We design and fabricate custom 3D acrylic lettering, LED backlit signs, and entrance fascias tailored to your brand identity."
     },
     {
       id: "service-two",
@@ -102,7 +112,8 @@ export default function App() {
       tag: "Editable Content",
       image: "/src/assets/images/service_production_fabrication_1792610397610.jpg",
       desc: "Expert metal welding and woodwork creating custom furniture, display racks, architectural fittings, and structural pieces.",
-      features: ["Bespoke Furniture", "Metal Framing & Welds", "Retail Display Stands"]
+      features: ["Bespoke Furniture", "Metal Framing & Welds", "Retail Display Stands", "Structural Woodwork"],
+      details: "Operating from our Jos North production yard, our skilled artisans combine traditional joinery with modern metal welding techniques to build durable, elegant furniture and architectural fixtures."
     },
     {
       id: "service-three",
@@ -110,7 +121,8 @@ export default function App() {
       tag: "Editable Content",
       image: "/src/assets/images/service_creative_design_1792610398423.jpg",
       desc: "Complete visual identity creation, brand collateral, high-impact marketing materials, and large-format printing.",
-      features: ["Logo & Brand Identity", "Marketing Collateral", "Large Format Print"]
+      features: ["Logo & Brand Identity", "Marketing Collateral", "Large Format Print", "Packaging Design"],
+      details: "We craft compelling visual identities that communicate professionalism and trust. From logo creation to comprehensive brand guidelines and high-resolution marketing prints, we elevate your market presence."
     },
     {
       id: "service-four",
@@ -118,7 +130,27 @@ export default function App() {
       tag: "Editable Content",
       image: "/src/assets/images/about_workshop_team_1792610399071.jpg",
       desc: "Stage backdrops, custom photo booths, exhibition stands, and immersive environment styling for events and corporate launches.",
-      features: ["Exhibition Stands", "Stage Backdrops", "Custom Event Props"]
+      features: ["Exhibition Stands", "Stage Backdrops", "Custom Event Props", "Experiential Displays"],
+      details: "Transform venues into immersive brand experiences. We design, fabricate, and install custom exhibition booths, conference backdrops, and event props that captivate audiences."
+    }
+  ];
+
+  const faqs = [
+    {
+      q: "Where is Mike Designer Hub located?",
+      a: "Our official production yard is located in Jos North, Plateau State, Nigeria. You are welcome to contact us to discuss your project requirements."
+    },
+    {
+      q: "How can I request a project quote?",
+      a: "You can easily request a quote by filling out our project enquiry form on the Contact page, which instantly formats and opens a direct WhatsApp chat with our team, or by calling us directly at 07031671850."
+    },
+    {
+      q: "What types of businesses do you work with?",
+      a: "We work with retail stores, corporate offices, event planners, hospitality venues, and individuals looking for custom furniture, signage, and professional design services."
+    },
+    {
+      q: "Do you deliver and install fabricated items?",
+      a: "Yes, for our physical production and fabrication projects in Plateau State and surrounding areas, we offer professional installation and mounting services."
     }
   ];
 
@@ -201,7 +233,7 @@ export default function App() {
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
-                className={`capitalize transition-colors px-3 py-1.5 rounded-lg whitespace-nowrap shrink-0 ${
+                className={`capitalize transition-colors px-3 py-1.5 rounded-lg whitespace-nowrap shrink-0 cursor-pointer ${
                   currentPage === page 
                     ? 'text-amber-400 bg-neutral-900 border border-neutral-800 shadow-sm' 
                     : 'text-neutral-400 hover:text-white'
@@ -247,7 +279,7 @@ export default function App() {
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
-                className={`w-full text-left capitalize px-4 py-3 rounded-xl text-base font-medium transition-colors ${
+                className={`w-full text-left capitalize px-4 py-3 rounded-xl text-base font-medium transition-colors cursor-pointer ${
                   currentPage === page ? 'bg-neutral-800 text-amber-400' : 'text-neutral-300 hover:bg-neutral-800/50'
                 }`}
               >
@@ -283,7 +315,7 @@ export default function App() {
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
               {/* Hero Section */}
-              <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-24">
+              <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-24">
                 <div className="absolute inset-0 z-0">
                   <img 
                     src="/src/assets/images/hero_workshop_banner_1792610397758.jpg" 
@@ -326,7 +358,7 @@ export default function App() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="max-w-2xl mx-auto text-base sm:text-lg text-neutral-300 leading-relaxed font-light"
                   >
-                    Discover the work of Mike Designer Hub — bringing creative ideas to life through quality design and production in Jos, Plateau State.
+                    Discover the work of Mike Designer Hub — bringing creative ideas to life through quality design, custom fabrication, and professional production in Jos, Plateau State.
                   </motion.p>
 
                   <motion.div 
@@ -378,7 +410,7 @@ export default function App() {
                 </div>
               </section>
 
-              {/* Quick Teaser Section */}
+              {/* Comprehensive Welcome Context Section */}
               <section className="py-24 bg-neutral-900 border-t border-neutral-800">
                 <div className="max-w-7xl mx-auto px-6 space-y-16">
                   <motion.div 
@@ -388,20 +420,35 @@ export default function App() {
                     transition={{ duration: 0.5 }}
                     className="max-w-3xl mx-auto text-center space-y-4"
                   >
-                    <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">Craft & Quality</span>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">Welcome to Mike Designer Hub</span>
                     <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                      Elevating Local Production in Jos North
+                      Where Creative Ideas Transform into Physical Reality
                     </h2>
-                    <p className="text-neutral-400 text-base">
-                      From bespoke signage to custom furniture and branding, we deliver excellence at every stage.
+                    <p className="text-neutral-300 text-base leading-relaxed font-light">
+                      Based in the heart of Jos North, Plateau State, Mike Designer Hub stands as a pillar of professional craftsmanship. We serve businesses, corporate institutions, and individual clients who demand exceptional quality in design, branding, and physical fabrication.
                     </p>
                   </motion.div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {[
-                      { title: "Bespoke Signage", desc: "Illuminated displays and storefront branding.", icon: Palette, page: 'services' },
-                      { title: "Custom Wood & Metal", desc: "Expert fabrication and joinery craftsmanship.", icon: Hammer, page: 'services' },
-                      { title: "Featured Portfolio", desc: "Explore our recently completed client projects.", icon: Layers, page: 'portfolio' },
+                      { 
+                        title: "Bespoke Signage & Branding", 
+                        desc: "High-impact storefront displays, 3D lettering, and illuminated signs that command attention and elevate your brand presence.", 
+                        icon: Palette, 
+                        page: 'services' 
+                      },
+                      { 
+                        title: "Custom Wood & Metal Work", 
+                        desc: "Rigorous welding, precise joinery, and custom furniture built to withstand rigorous commercial and residential use.", 
+                        icon: Hammer, 
+                        page: 'services' 
+                      },
+                      { 
+                        title: "Curated Project Portfolio", 
+                        desc: "Browse our gallery of completed commissions showcasing our meticulous attention to detail and finishing.", 
+                        icon: Layers, 
+                        page: 'portfolio' 
+                      },
                     ].map((card, idx) => (
                       <motion.div
                         key={idx}
@@ -410,20 +457,88 @@ export default function App() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: idx * 0.1 }}
                         onClick={() => setCurrentPage(card.page as Page)}
-                        className="p-8 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-amber-500/40 transition-all cursor-pointer group space-y-4 shadow-lg"
+                        className="p-8 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-amber-500/40 transition-all cursor-pointer group space-y-4 shadow-lg flex flex-col justify-between"
                       >
-                        <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
-                          <card.icon className="w-6 h-6" />
+                        <div className="space-y-4">
+                          <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                            <card.icon className="w-6 h-6" />
+                          </div>
+                          <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">{card.title}</h3>
+                          <p className="text-sm text-neutral-400 font-light leading-relaxed">{card.desc}</p>
                         </div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">{card.title}</h3>
-                        <p className="text-sm text-neutral-400 font-light">{card.desc}</p>
-                        <div className="flex items-center gap-1 text-xs font-semibold text-amber-400 pt-2">
-                          <span>Learn more</span>
+                        <div className="flex items-center gap-1 text-xs font-semibold text-amber-400 pt-4">
+                          <span>Explore section</span>
                           <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </div>
                       </motion.div>
                     ))}
                   </div>
+                </div>
+              </section>
+
+              {/* Production Standards Section */}
+              <section className="py-24 bg-neutral-950 border-t border-neutral-800">
+                <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                  <motion.div 
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="lg:col-span-6 space-y-6"
+                  >
+                    <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">Our Standards</span>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                      Uncompromising Quality from Jos North to the World
+                    </h2>
+                    <p className="text-neutral-300 leading-relaxed font-light">
+                      Every project undertaken at Mike Designer Hub goes through a rigorous workflow. From initial concept sketching and material selection to precision fabrication and final quality testing, we ensure nothing leaves our yard unless it meets our exacting benchmarks.
+                    </p>
+                    <div className="space-y-3 pt-2">
+                      <div className="flex items-center gap-3 text-sm text-neutral-300">
+                        <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0" />
+                        <span>Sourced with premium durable timbers and treated metals.</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-sm text-neutral-300">
+                        <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0" />
+                        <span>Direct consultations via phone and WhatsApp for transparent updates.</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-sm text-neutral-300">
+                        <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0" />
+                        <span>Reliable delivery and installation across Plateau State.</span>
+                      </div>
+                    </div>
+                    <div className="pt-4">
+                      <button 
+                        onClick={() => setCurrentPage('contact')}
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-500 text-black font-semibold text-xs uppercase tracking-wider hover:bg-amber-400 transition-colors cursor-pointer"
+                      >
+                        Start Your Project Today
+                        <ArrowUpRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </motion.div>
+
+                  <motion.div 
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="lg:col-span-6"
+                  >
+                    <div className="relative rounded-2xl overflow-hidden border border-neutral-800 shadow-2xl">
+                      <img 
+                        src="/src/assets/images/service_production_fabrication_1792610397610.jpg" 
+                        alt="Precision Fabrication at Mike Designer Hub" 
+                        className="w-full h-[400px] object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent" />
+                      <div className="absolute bottom-6 left-6 right-6 p-6 bg-neutral-950/90 backdrop-blur-md rounded-xl border border-neutral-800">
+                        <p className="text-xs font-semibold text-amber-400 uppercase tracking-wider">Production Excellence</p>
+                        <p className="text-sm font-bold text-white mt-1">State-of-the-art woodwork & metal fabrication yard.</p>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
               </section>
             </motion.div>
@@ -437,7 +552,7 @@ export default function App() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -20 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="py-24 bg-neutral-950"
+              className="py-24 bg-neutral-950 space-y-24"
             >
               <div className="max-w-7xl mx-auto px-6 space-y-16">
                 <motion.div 
@@ -450,10 +565,11 @@ export default function App() {
                   <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">About Our Business</span>
                   <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">Creativity Meets Craftsmanship.</h1>
                   <p className="text-neutral-400 text-lg">
-                    Discover who we are and what drives our commitment to quality production in Jos North.
+                    Get to know the story, mission, and professional ethos behind Mike Designer Hub in Jos North.
                   </p>
                 </motion.div>
 
+                {/* Main About Split */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
                   <motion.div 
                     initial={{ opacity: 0, x: -30 }}
@@ -495,6 +611,9 @@ export default function App() {
                     <p className="text-neutral-300 leading-relaxed font-light">
                       Whether you are looking for custom signage, bespoke furniture, branding identity, or professional production services, our focus remains firmly on meticulous attention to detail, quality materials, and bringing your distinct ideas to life.
                     </p>
+                    <p className="text-neutral-300 leading-relaxed font-light">
+                      Our workshop is equipped with reliable tools and operated by experienced artisans who understand the nuances of modern commercial display and durable structural fabrication.
+                    </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                       <div className="p-4 rounded-xl bg-neutral-900 border border-neutral-800 flex items-start gap-3">
@@ -515,6 +634,62 @@ export default function App() {
                   </motion.div>
                 </div>
               </div>
+
+              {/* Core Values / Context Grid */}
+              <section className="max-w-7xl mx-auto px-6 space-y-12">
+                <div className="text-center space-y-3">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">Our Core Principles</span>
+                  <h2 className="text-3xl font-bold text-white">What Drives Mike Designer Hub</h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {[
+                    { title: "Uncompromising Precision", desc: "Every cut, measurement, and weld is executed with strict adherence to architectural blueprints and design specifications." },
+                    { title: "Client-Centric Collaboration", desc: "We listen closely to your vision, offering professional guidance and regular updates from our Jos North workshop." },
+                    { title: "Reliable Execution", desc: "We respect timelines and deliver robust, high-grade physical installations that stand the test of time." }
+                  ].map((val, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                      className="p-8 rounded-2xl bg-neutral-900 border border-neutral-800 space-y-4 shadow-lg"
+                    >
+                      <div className="text-amber-400 font-mono text-lg font-bold">0{idx + 1}.</div>
+                      <h3 className="text-xl font-bold text-white">{val.title}</h3>
+                      <p className="text-sm text-neutral-400 leading-relaxed font-light">{val.desc}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </section>
+
+              {/* FAQs Section */}
+              <section className="max-w-5xl mx-auto px-6 space-y-12">
+                <div className="text-center space-y-3">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">Common Inquiries</span>
+                  <h2 className="text-3xl font-bold text-white">Frequently Asked Questions</h2>
+                </div>
+
+                <div className="space-y-4">
+                  {faqs.map((faq, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: idx * 0.05 }}
+                      className="p-6 rounded-2xl bg-neutral-900 border border-neutral-800 space-y-2"
+                    >
+                      <h3 className="text-base font-bold text-white flex items-center gap-2">
+                        <HelpCircle className="w-4 h-4 text-amber-400 shrink-0" />
+                        {faq.q}
+                      </h3>
+                      <p className="text-sm text-neutral-400 pl-6 leading-relaxed font-light">{faq.a}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </section>
             </motion.div>
           )}
 
@@ -526,7 +701,7 @@ export default function App() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -20 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="py-24 bg-neutral-950"
+              className="py-24 bg-neutral-950 space-y-24"
             >
               <div className="max-w-7xl mx-auto px-6 space-y-16">
                 <motion.div 
@@ -539,11 +714,11 @@ export default function App() {
                   <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">Our Offerings</span>
                   <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">Professional Services</h1>
                   <p className="text-neutral-400 text-base sm:text-lg">
-                    Explore our core service offerings. Each category is structured for seamless customisation to suit your project requirements.
+                    Comprehensive design and production capabilities delivered from our Jos North workshop. Each service is fully customizable.
                   </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-12">
                   {services.map((service, index) => (
                     <motion.div 
                       key={service.id}
@@ -551,56 +726,94 @@ export default function App() {
                       whileInView={{ opacity: 1, y: 0, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-neutral-900 rounded-2xl overflow-hidden border border-neutral-800 hover:border-amber-500/40 transition-all flex flex-col group shadow-xl"
+                      className="bg-neutral-900 rounded-2xl overflow-hidden border border-neutral-800 grid grid-cols-1 lg:grid-cols-12 shadow-xl"
                     >
-                      <div className="relative h-64 overflow-hidden">
+                      <div className="lg:col-span-5 relative min-h-[300px]">
                         <img 
                           src={service.image} 
                           alt={service.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent lg:hidden" />
                         <span className="absolute top-4 right-4 px-3 py-1 bg-black/70 backdrop-blur-md rounded-full text-xs font-medium text-amber-400 border border-amber-500/30">
                           {service.tag}
                         </span>
                       </div>
 
-                      <div className="p-8 flex-1 flex flex-col justify-between space-y-6">
-                        <div className="space-y-3">
-                          <div className="text-xs font-mono text-neutral-400">0{index + 1}.</div>
-                          <h3 className="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">
+                      <div className="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-between space-y-6">
+                        <div className="space-y-4">
+                          <div className="text-xs font-mono text-amber-400 font-semibold uppercase tracking-wider">Service Category 0{index + 1}</div>
+                          <h3 className="text-2xl font-bold text-white">
                             {service.title}
                           </h3>
-                          <p className="text-sm text-neutral-300 leading-relaxed font-light">
+                          <p className="text-base text-neutral-300 leading-relaxed font-light">
                             {service.desc}
+                          </p>
+                          <p className="text-sm text-neutral-400 leading-relaxed font-light">
+                            {service.details}
                           </p>
                         </div>
 
-                        <div className="space-y-4 pt-4 border-t border-neutral-800/80">
-                          <div className="flex flex-wrap gap-2">
-                            {service.features.map((feat, fIdx) => (
-                              <span key={fIdx} className="text-xs bg-neutral-950 text-neutral-300 px-3 py-1 rounded-md border border-neutral-800">
-                                {feat}
-                              </span>
-                            ))}
+                        <div className="space-y-6 pt-6 border-t border-neutral-800">
+                          <div>
+                            <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-3">Key Capabilities:</p>
+                            <div className="flex flex-wrap gap-2">
+                              {service.features.map((feat, fIdx) => (
+                                <span key={fIdx} className="text-xs bg-neutral-950 text-neutral-300 px-3 py-1.5 rounded-lg border border-neutral-800">
+                                  {feat}
+                                </span>
+                              ))}
+                            </div>
                           </div>
 
-                          <a 
-                            href={whatsappDirectUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-xs font-semibold text-amber-400 hover:text-amber-300 transition-colors pt-2"
-                          >
-                            Enquire about this service via WhatsApp
-                            <ChevronRight className="w-3.5 h-3.5" />
-                          </a>
+                          <div>
+                            <a 
+                              href={whatsappDirectUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-500 text-black font-semibold text-xs uppercase tracking-wider hover:bg-amber-400 transition-colors"
+                            >
+                              <MessageSquare className="w-4 h-4 fill-current" />
+                              Enquire via WhatsApp
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </motion.div>
                   ))}
                 </div>
               </div>
+
+              {/* Working Process Section */}
+              <section className="max-w-7xl mx-auto px-6 space-y-12 border-t border-neutral-900 pt-24">
+                <div className="text-center space-y-3">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">Step-by-Step Methodology</span>
+                  <h2 className="text-3xl font-bold text-white">Our Production Process</h2>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {[
+                    { step: "01", title: "Consultation & Brief", desc: "We discuss your project goals, dimensions, and design preferences via WhatsApp, phone, or at our Jos yard." },
+                    { step: "02", title: "Design & Planning", desc: "We draft professional layouts, select durable materials, and confirm exact specifications before starting work." },
+                    { step: "03", title: "Precision Fabrication", desc: "Our artisans execute woodwork, metal welding, and branding creation with rigorous attention to detail." },
+                    { step: "04", title: "Delivery & Installation", desc: "We conduct thorough quality checks and provide secure delivery and professional mounting for your project." }
+                  ].map((proc, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                      className="p-8 rounded-2xl bg-neutral-900 border border-neutral-800 space-y-4"
+                    >
+                      <div className="text-3xl font-extrabold text-amber-400 font-mono">{proc.step}</div>
+                      <h3 className="text-lg font-bold text-white">{proc.title}</h3>
+                      <p className="text-sm text-neutral-400 leading-relaxed font-light">{proc.desc}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </section>
             </motion.div>
           )}
 
@@ -612,7 +825,7 @@ export default function App() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -20 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="py-24 bg-neutral-950"
+              className="py-24 bg-neutral-950 space-y-16"
             >
               <div className="max-w-7xl mx-auto px-6 space-y-16">
                 <motion.div 
@@ -625,11 +838,11 @@ export default function App() {
                   <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">Showcase</span>
                   <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">Featured Works & Craft</h1>
                   <p className="text-neutral-400 text-base sm:text-lg">
-                    A glimpse into our recent design and production projects executed with precision in Jos North. Click any project to view in detail.
+                    Explore our portfolio of recent design and production commissions. Click any project card to view high-resolution imagery and specifications.
                   </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {portfolioItems.map((item, idx) => (
                     <motion.div 
                       key={item.id}
@@ -638,31 +851,41 @@ export default function App() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: idx * 0.1 }}
                       onClick={() => setLightboxIndex(idx)}
-                      className="group relative bg-neutral-900 rounded-2xl overflow-hidden border border-neutral-800 cursor-pointer hover:border-amber-500/50 transition-all shadow-xl"
+                      className="group relative bg-neutral-900 rounded-2xl overflow-hidden border border-neutral-800 cursor-pointer hover:border-amber-500/50 transition-all shadow-xl flex flex-col"
                     >
-                      <div className="aspect-[4/3] overflow-hidden relative">
+                      <div className="aspect-[16/10] overflow-hidden relative">
                         <img 
                           src={item.image} 
                           alt={item.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                           referrerPolicy="no-referrer"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent opacity-90" />
                         
-                        <div className="absolute bottom-0 left-0 right-0 p-8 space-y-3">
+                        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity border border-white/10">
+                          <ExternalLink className="w-4 h-4" />
+                        </div>
+                      </div>
+
+                      <div className="p-8 space-y-4 flex-1 flex flex-col justify-between">
+                        <div className="space-y-3">
                           <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">
                             {item.category}
                           </span>
                           <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-amber-300 transition-colors">
                             {item.title}
                           </h3>
-                          <p className="text-sm text-neutral-300 line-clamp-2 font-light">
+                          <p className="text-sm text-neutral-300 font-light leading-relaxed">
                             {item.description}
                           </p>
                         </div>
 
-                        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity border border-white/10">
-                          <ExternalLink className="w-4 h-4" />
+                        <div className="pt-4 border-t border-neutral-800 flex flex-wrap gap-2">
+                          {item.specs.map((spec, sIdx) => (
+                            <span key={sIdx} className="text-xs bg-neutral-950 text-neutral-400 px-3 py-1 rounded-md border border-neutral-800/80">
+                              {spec}
+                            </span>
+                          ))}
                         </div>
                       </div>
                     </motion.div>
@@ -680,7 +903,7 @@ export default function App() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: -20 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="py-24 bg-neutral-950"
+              className="py-24 bg-neutral-950 space-y-16"
             >
               <div className="max-w-7xl mx-auto px-6 space-y-16">
                 <motion.div 
@@ -693,7 +916,7 @@ export default function App() {
                   <span className="text-xs font-semibold uppercase tracking-wider text-amber-400">Get In Touch</span>
                   <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">Let&apos;s Bring Your Ideas to Life.</h1>
                   <p className="text-neutral-400 text-base sm:text-lg">
-                    Contact us directly or send an enquiry. We respond promptly via WhatsApp and phone calls.
+                    Contact us directly or submit your project enquiry below. We respond promptly via WhatsApp and phone calls.
                   </p>
                 </motion.div>
 
@@ -893,7 +1116,7 @@ export default function App() {
         <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 sm:p-8">
           <button 
             onClick={() => setLightboxIndex(null)}
-            className="absolute top-6 right-6 p-3 rounded-full bg-neutral-800 text-white hover:bg-neutral-700 transition-colors z-50"
+            className="absolute top-6 right-6 p-3 rounded-full bg-neutral-800 text-white hover:bg-neutral-700 transition-colors z-50 cursor-pointer"
             aria-label="Close lightbox"
           >
             <X className="w-6 h-6" />
@@ -919,6 +1142,11 @@ export default function App() {
                 <p className="text-sm text-neutral-300 leading-relaxed font-light">
                   {portfolioItems[lightboxIndex].description}
                 </p>
+                <div className="pt-2 space-y-1">
+                  {portfolioItems[lightboxIndex].specs.map((spec, sIdx) => (
+                    <p key={sIdx} className="text-xs text-neutral-400 font-mono">· {spec}</p>
+                  ))}
+                </div>
               </div>
 
               <div className="space-y-4 pt-6 border-t border-neutral-800">
@@ -927,13 +1155,13 @@ export default function App() {
                   <div className="flex gap-2">
                     <button 
                       onClick={() => setLightboxIndex((lightboxIndex - 1 + portfolioItems.length) % portfolioItems.length)}
-                      className="px-3 py-1.5 rounded bg-neutral-800 text-white hover:bg-neutral-700 transition-colors"
+                      className="px-3 py-1.5 rounded bg-neutral-800 text-white hover:bg-neutral-700 transition-colors cursor-pointer"
                     >
                       Prev
                     </button>
                     <button 
                       onClick={() => setLightboxIndex((lightboxIndex + 1) % portfolioItems.length)}
-                      className="px-3 py-1.5 rounded bg-neutral-800 text-white hover:bg-neutral-700 transition-colors"
+                      className="px-3 py-1.5 rounded bg-neutral-800 text-white hover:bg-neutral-700 transition-colors cursor-pointer"
                     >
                       Next
                     </button>
@@ -977,7 +1205,7 @@ export default function App() {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className="capitalize hover:text-amber-400 transition-colors"
+                  className="capitalize hover:text-amber-400 transition-colors cursor-pointer"
                 >
                   {page}
                 </button>
